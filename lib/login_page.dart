@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_auth_app/auth_controller.dart';
 import 'package:flutter_firebase_auth_app/signup_page.dart';
 import 'package:get/get.dart';
 
@@ -11,6 +12,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
@@ -18,6 +22,7 @@ class _LoginPageState extends State<LoginPage> {
 
     return Scaffold(
       backgroundColor: Colors.white,
+      resizeToAvoidBottomInset: false,
       body: Column(
         children: [
           // Head Image Container
@@ -73,6 +78,7 @@ class _LoginPageState extends State<LoginPage> {
                             color: Colors.grey.withOpacity(0.2)),
                       ]),
                   child: TextField(
+                    controller: emailController,
                     decoration: InputDecoration(
                       hintText: "Email",
                       prefixIcon: Icon(
@@ -114,6 +120,8 @@ class _LoginPageState extends State<LoginPage> {
                             color: Colors.grey.withOpacity(0.2)),
                       ]),
                   child: TextField(
+                    controller: passwordController,
+                    obscureText: true,
                     decoration: InputDecoration(
                       hintText: "Password",
                       prefixIcon: Icon(
@@ -167,24 +175,30 @@ class _LoginPageState extends State<LoginPage> {
           ),
 
           // Sign In Button Container
-          Container(
-            // Sign In Button Container
-            width: w * 0.5,
-            height: h * 0.08,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
-              image: DecorationImage(
-                image: AssetImage("img/loginbtn.png"),
-                fit: BoxFit.cover,
+          GestureDetector(
+            onTap: () {
+              AuthController.instance.login(
+                  emailController.text.trim(), passwordController.text.trim());
+            },
+            child: Container(
+              // Sign In Button Container
+              width: w * 0.5,
+              height: h * 0.08,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                image: DecorationImage(
+                  image: AssetImage("img/loginbtn.png"),
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
-            child: Center(
-              child: Text(
-                "Sign In",
-                style: TextStyle(
-                  fontSize: 36,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+              child: Center(
+                child: Text(
+                  "Sign In",
+                  style: TextStyle(
+                    fontSize: 36,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),
@@ -208,8 +222,8 @@ class _LoginPageState extends State<LoginPage> {
                         color: Colors.black,
                         fontSize: 20,
                         fontWeight: FontWeight.bold),
-                    recognizer: TapGestureRecognizer()..onTap = ()=>Get.to(() => SignUpPage()),
-
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () => Get.to(() => SignUpPage()),
                   ),
                 ]),
           ),

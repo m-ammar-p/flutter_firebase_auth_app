@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_auth_app/auth_controller.dart';
+import 'package:flutter_firebase_auth_app/signup_page.dart';
+import 'package:get/get.dart';
 
 class WelcomePage extends StatelessWidget {
-  const WelcomePage({Key? key}) : super(key: key);
+  String email;
+
+  WelcomePage({Key? key, required this.email}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +65,7 @@ class WelcomePage extends StatelessWidget {
                 ),
                 // Email Text
                 Text(
-                  "A@A.com",
+                  email,
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -70,26 +75,33 @@ class WelcomePage extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: 200,),
+          SizedBox(
+            height: 200,
+          ),
           // Sign Out Button Container
-          Container(
-            // Sign In Button Container
-            width: w * 0.5,
-            height: h * 0.08,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
-              image: DecorationImage(
-                image: AssetImage("img/loginbtn.png"),
-                fit: BoxFit.cover,
+          GestureDetector(
+            onTap: () {
+              AuthController.instance.logout();
+            },
+            child: Container(
+              // Sign In Button Container
+              width: w * 0.5,
+              height: h * 0.08,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                image: DecorationImage(
+                  image: AssetImage("img/loginbtn.png"),
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
-            child: Center(
-              child: Text(
-                "Sign Out ",
-                style: TextStyle(
-                  fontSize: 36,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+              child: Center(
+                child: Text(
+                  "Sign Out ",
+                  style: TextStyle(
+                    fontSize: 36,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),
@@ -97,9 +109,6 @@ class WelcomePage extends StatelessWidget {
           SizedBox(
             height: w * 0.08,
           ),
-
-
-
         ],
       ),
     );

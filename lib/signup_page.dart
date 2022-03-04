@@ -3,15 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_firebase_auth_app/auth_controller.dart';
 import 'package:get/get.dart';
 
-class SignUpPage extends StatelessWidget {
-  const SignUpPage({Key? key}) : super(key: key);
+class SignUpPage extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => _SignUpPage();
+} // SignUpPage Class
 
+class _SignUpPage extends State<SignUpPage> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
-
     List images = [
       "g.png",
       "t.png",
@@ -22,7 +24,7 @@ class SignUpPage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: false,
       body: Column(
         children: [
           // Head Image Container
@@ -40,7 +42,7 @@ class SignUpPage extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(
-                  height: h * 0.16,
+                  height: h * 0.17,
                 ),
                 CircleAvatar(
                   backgroundColor: Colors.white70,
@@ -160,8 +162,9 @@ class SignUpPage extends StatelessWidget {
 
           // Sign Up Button Container
           GestureDetector(
-            onTap: (){
-              AuthController.instance.register(emailController.text.trim(), passwordController.text.trim());
+            onTap: () {
+              AuthController.instance.register(
+                  emailController.text.trim(), passwordController.text.trim());
             },
             child: Container(
               // Sign In Button Container
@@ -186,17 +189,20 @@ class SignUpPage extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 10,),
+          SizedBox(
+            height: 10,
+          ),
 
           // have ana account Text
-          RichText(text: TextSpan(
-            recognizer: TapGestureRecognizer()..onTap = ()=>Get.back(),
-            text: "Have an account?",
-            style: TextStyle(
-              fontSize: 20,
-              color: Colors.grey[500],
+          RichText(
+            text: TextSpan(
+              recognizer: TapGestureRecognizer()..onTap = () => Get.back(),
+              text: "Have an account?",
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.grey[500],
+              ),
             ),
-          ),
           ),
 
           SizedBox(
