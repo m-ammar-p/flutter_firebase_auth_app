@@ -1,10 +1,14 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_auth_app/auth_controller.dart';
 import 'package:flutter_firebase_auth_app/login_page.dart';
-import 'package:flutter_firebase_auth_app/signup_page.dart';
-import 'package:flutter_firebase_auth_app/welcome_page.dart';
 import 'package:get/get.dart';
 
-void main() {
+Future<void> main() async {
+  // binding firebase and ensuring it will initialize when app starts
+  WidgetsFlutterBinding.ensureInitialized();
+  // dependency injection (AuthController (AuthController.instance) will be available to our app )
+  await Firebase.initializeApp().then((value) => Get.put(AuthController()));
   runApp(const MyApp());
 }
 
