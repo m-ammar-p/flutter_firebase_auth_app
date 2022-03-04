@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_auth_app/auth_controller.dart';
 import 'package:flutter_firebase_auth_app/screens/signup_page.dart';
+import 'package:flutter_firebase_auth_app/widgets/appButton.dart';
 import 'package:flutter_firebase_auth_app/widgets/appHeadImage.dart';
 import 'package:flutter_firebase_auth_app/widgets/appTextFields.dart';
 import 'package:get/get.dart';
@@ -28,10 +29,11 @@ class _LoginPageState extends State<LoginPage> {
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
       body: Column(
+
         children: [
           // Head Image Container
           AppHeadImage(),
-
+          SizedBox(height: w * 0.04,),
           // Heading and textFields Container
           Container(
             // Heading and textFields Container
@@ -41,50 +43,45 @@ class _LoginPageState extends State<LoginPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Text
-                AppText(text: 'Hello', fontSize: 70,fontWeight: FontWeight.bold,),
-                AppText(text: 'Sign in to your account', fontSize: 20, color: Colors.grey,),
+                const AppText(text: 'Firebase Authentication App',
+                  fontSize: 30,
+                  fontWeight:
+                  FontWeight.bold,color: Colors.black54,),
+                AppText(text: 'Sign in to your account', fontSize: 20, color: Colors.green[400],),
 
-                const SizedBox(
-                  height: 50,
+                 SizedBox(
+                  height: w * 0.08,
                 ),
 
-                // Textfiled Container
+                // TextField Container
                 AppTextFields(hintText: "Email",
-                  prefixIcon: Icon(Icons.email, color: Colors.deepOrangeAccent,),
+                  prefixIcon: Icon(Icons.email, color: Colors.green[400],),
                   controller: emailController,
                 ),
 
-                SizedBox(height: 20,),
+                SizedBox(height: w * 0.04,),
                 AppTextFields(hintText: "Password",
-                  prefixIcon: Icon(Icons.password, color: Colors.deepOrangeAccent,)
+                  prefixIcon: Icon(Icons.password, color: Colors.green[400],)
                   ,isPassField: true,
                   controller: passwordController,
                 ),
 
-                SizedBox(
-                  height: 20,
-                ),
+                SizedBox(height: w * 0.03,),
                 // Forgot Password Row
                 Row(
                   // Forgot Password Row
-                  children: [
+                  children:  [
                     Spacer(),
-                    Text(
-                      "Forgot your Password?",
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.grey,
-                      ),
-                    ),
+                    AppText(text: "Forgot your Password?",
+                      fontSize: 20,
+                      color: Colors.green[400],),
                   ],
                 ),
               ],
             ),
           ),
 
-          SizedBox(
-            height: 70,
-          ),
+          SizedBox(height: w * 0.1,),
 
           // Sign In Button Container
           GestureDetector(
@@ -92,27 +89,10 @@ class _LoginPageState extends State<LoginPage> {
               AuthController.instance.login(
                   emailController.text.trim(), passwordController.text.trim());
             },
-            child: Container(
-              // Sign In Button Container
-              width: w * 0.5,
-              height: h * 0.08,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                image: DecorationImage(
-                  image: AssetImage("img/loginbtn.png"),
-                  fit: BoxFit.cover,
-                ),
-              ),
-              child: Center(
-                child: Text(
-                  "Sign In",
-                  style: TextStyle(
-                    fontSize: 36,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
+            child: const AppButton(btnText: 'Sign In',
+              fontSize: 36,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
             ),
           ),
           SizedBox(
@@ -120,25 +100,29 @@ class _LoginPageState extends State<LoginPage> {
           ),
 
           // Register Account Text
-          RichText(
-            text: TextSpan(
-                text: "Don\'t have an account?",
-                style: TextStyle(
-                  color: Colors.grey[500],
-                  fontSize: 20,
+          Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                AppText(text: "Don\'t have an account? ",
+                  fontSize: 24,
+                  color: Colors.green[400],
                 ),
-                children: [
-                  TextSpan(
-                    text: " Create",
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () => Get.to(() => SignUpPage()),
+
+                GestureDetector(
+                  onTap: (){
+                    Get.to(() => SignUpPage());
+                  },
+                  child: AppText(text: "Create",
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.green[500],
                   ),
-                ]),
+                ),
+              ],
+            ),
           ),
+
         ],
       ),
     );

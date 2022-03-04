@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_auth_app/auth_controller.dart';
 import 'package:flutter_firebase_auth_app/screens/signup_page.dart';
+import 'package:flutter_firebase_auth_app/widgets/appText.dart';
 import 'package:get/get.dart';
+
+import '../widgets/appButton.dart';
+import '../widgets/appHeadImage.dart';
 
 class WelcomePage extends StatelessWidget {
   String email;
@@ -18,21 +22,11 @@ class WelcomePage extends StatelessWidget {
       body: Column(
         children: [
           // Head Image Container
-          Container(
-            // Head Image Container
-            width: w,
-            // 1/3 height of the screen
-            height: h * 0.3,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("img/signup.png"),
-                fit: BoxFit.cover,
-              ),
-            ),
+          AppHeadImage(
             child: Column(
               children: [
                 SizedBox(
-                  height: h * 0.16,
+                  height: h * 0.17,
                 ),
                 CircleAvatar(
                   backgroundColor: Colors.white70,
@@ -44,7 +38,7 @@ class WelcomePage extends StatelessWidget {
           ),
 
           SizedBox(
-            height: 70,
+            height: w * 0.15,
           ),
 
           // Welcome And email Text
@@ -55,55 +49,34 @@ class WelcomePage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Welcome Text
-                Text(
-                  "Welcome",
-                  style: TextStyle(
-                    fontSize: 36,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black54,
-                  ),
+                const AppText(text: "Welcome",
+                  fontSize: 36,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black54,
                 ),
                 // Email Text
-                Text(
-                  email,
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.grey[500],
-                  ),
+                AppText(text: email,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.green[400],
                 ),
+
               ],
             ),
           ),
           SizedBox(
-            height: 200,
+            height: w * 0.3,
           ),
           // Sign Out Button Container
           GestureDetector(
             onTap: () {
               AuthController.instance.logout();
             },
-            child: Container(
-              // Sign In Button Container
-              width: w * 0.5,
-              height: h * 0.08,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                image: DecorationImage(
-                  image: AssetImage("img/loginbtn.png"),
-                  fit: BoxFit.cover,
-                ),
-              ),
-              child: Center(
-                child: Text(
-                  "Sign Out ",
-                  style: TextStyle(
-                    fontSize: 36,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
+            child: const AppButton(
+              btnText: 'Sign Out',
+              fontSize: 36,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
             ),
           ),
           SizedBox(
