@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_auth_app/auth_controller.dart';
-import 'package:flutter_firebase_auth_app/signup_page.dart';
+import 'package:flutter_firebase_auth_app/screens/signup_page.dart';
 import 'package:get/get.dart';
 
 class WelcomePage extends StatelessWidget {

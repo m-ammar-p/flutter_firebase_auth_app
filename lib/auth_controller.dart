@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_firebase_auth_app/signup_page.dart';
-import 'package:flutter_firebase_auth_app/welcome_page.dart';
+import 'package:flutter_firebase_auth_app/screens/signup_page.dart';
+import 'package:flutter_firebase_auth_app/screens/welcome_page.dart';
 import 'package:get/get.dart';
-import 'login_page.dart';
+import 'screens/login_page.dart';
 
 class AuthController extends GetxController {
   // Globally accessible in App
